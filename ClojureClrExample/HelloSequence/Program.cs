@@ -11,6 +11,8 @@
     {
         public static void Main(string[] args)
         {
+            ExampleUtil.Util.StartMultiCoreJit("HelloSequence.profile");
+
             LoadFile();
         }
 

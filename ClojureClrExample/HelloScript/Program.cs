@@ -38,6 +38,8 @@
 
         public static void Main(string[] args)
         {
+            ExampleUtil.Util.StartMultiCoreJit("HelloScript.profile");
+
             LoadFile();
         }
     }
