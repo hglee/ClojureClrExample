@@ -3,7 +3,7 @@ Clojure CLR example project
 
 1. [Hello Script](ClojureClrExample/HelloScript)
 
-Example for baisc interop.
+Example for basic interop.
 
 2. [Hello Sequence](ClojureClrExample/HelloSequence)
 
