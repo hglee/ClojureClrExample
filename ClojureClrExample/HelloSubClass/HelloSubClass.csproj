@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Clojure" Version="1.9.0" />
+    <PackageReference Include="Clojure" Version="1.10.0" />
   </ItemGroup>
 
   <ItemGroup>
