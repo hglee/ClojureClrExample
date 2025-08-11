@@ -1,14 +1,15 @@
 ﻿namespace HelloScript
 {
-    using System;
     using clojure.lang;
+    using System;
+    using System.IO;
 
     public class Program
     {
         private static void LoadFile()
         {
             // script file path
-            var filePath = @"C:\Workspace\ClojureClrExample\ClojureClrExample\HelloScript\Resource\Script.clj";
+            var filePath = Path.Combine(ExampleUtil.Util.GetCallerFilePathDirectory(), "Resource", "Script.clj");
 
             var loadFile = clojure.clr.api.Clojure.var("clojure.core", "load-file");
             loadFile.invoke(filePath);

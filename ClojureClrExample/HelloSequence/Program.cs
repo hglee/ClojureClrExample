@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using clojure.lang;
@@ -18,7 +19,7 @@
 
         private static void LoadFile()
         {
-            var filePath = @"C:\Workspace\ClojureClrExample\ClojureClrExample\HelloSequence\Resource\Script.clj";
+            var filePath = Path.Combine(ExampleUtil.Util.GetCallerFilePathDirectory(), "Resource", "Script.clj");
 
             var loadFile = clojure.clr.api.Clojure.var("clojure.core", "load-file");
             loadFile.invoke(filePath);
@@ -43,7 +44,7 @@
 
             if (clojure.clr.api.Clojure.var("ScriptNs", "big-seq").invoke() is Iterate iter)
             {
-                foreach (var v in SkipIterate(iter, 123456789).Take(3))
+                foreach (var v in iter.SkipIterate(123456789).Take(3))
                 {
                     Console.WriteLine(v);
                 }
@@ -63,23 +64,29 @@
                 yield return v++;
             }
         }
+    }
 
+    /// <summary>
+    /// Extension methods for <see cref="Iterate"/>.
+    /// </summary>
+    public static class IterateExt
+    {
         /// <summary>
         /// Skip items from iter.
         /// </summary>
         /// <param name="iter">Target iterate</param>
         /// <param name="count">Number of count.</param>
         /// <returns>Skipped sequence.</returns>
-        private static IEnumerable<object> SkipIterate(Iterate iter, int count)
+        public static IEnumerable<object> SkipIterate(this Iterate iter, int count)
         {
             if (iter == null)
             {
-                throw new ArgumentNullException(nameof(iter));
+                yield break;
             }
 
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count));
+                yield break;
             }
 
             var fi = typeof(Iterate).GetField("_next", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -100,7 +107,10 @@
                 ++i;
             }
 
-            return iter;
+            foreach (var obj in iter)
+            {
+                yield return obj;
+            }
         }
     }
 }

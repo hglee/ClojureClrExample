@@ -1,6 +1,7 @@
 ﻿namespace HelloInterface
 {
     using System;
+    using System.IO;
 
     public class Program
     {
@@ -13,7 +14,7 @@
 
         private static void LoadFile()
         {
-            var filePath = @"C:\Workspace\ClojureClrExample\ClojureClrExample\HelloInterface\Resource\Script.clj";
+            var filePath = Path.Combine(ExampleUtil.Util.GetCallerFilePathDirectory(), "Resource", "Script.clj");
 
             var loadFile = clojure.clr.api.Clojure.var("clojure.core", "load-file");
             loadFile.invoke(filePath);

@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Runtime.CompilerServices;
 
     public static class Util
     {
@@ -24,6 +25,11 @@
 #else
             Console.WriteLine("Multi core JIT only works for .NET framework");
 #endif
+        }
+
+        public static string GetCallerFilePathDirectory([CallerFilePath] string filePath = "")
+        {
+            return Path.GetDirectoryName(filePath);
         }
     }
 }

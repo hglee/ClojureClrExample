@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net472</TargetFrameworks>
+    <TargetFrameworks>net472;net80</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Clojure" Version="1.11.0" />
+    <PackageReference Include="Clojure" Version="1.12.0" />
   </ItemGroup>
 
   <ItemGroup>
